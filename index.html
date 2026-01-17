@@ -3,1032 +3,1766 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tant Arts — Photography & Video Marketing</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Tant Arts | Visual Storytelling</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            /* Color System */
-            --black: #0a0a0a;
-            --teal: #00d4aa;
-            --orange: #ff6b35;
-            --white: #ffffff;
-            --gray-light: #b0b0b0;
-            --gray-dark: #1a1a1a;
+            /* Palette */
+            --bg-dark: #050505;
+            --bg-section: #0b0b0b;
+            --bg-modal: #0f0f0f;
             
-            /* Typography */
+            /* --- PREMIUM GOLD PALETTE --- */
+            --accent-gold: #D4AF37; 
+            --accent-gold-light: #eac765;
+            --accent-orange-pop: #ff7e5f; 
+            
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border-light: rgba(255,255,255,0.1);
+            
             --font-script: 'Great Vibes', cursive;
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Lato', sans-serif;
-            
-            /* Spacing */
-            --section-padding: clamp(4rem, 10vw, 8rem);
-            --container-max: 1400px;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background: var(--black);
-            color: var(--white);
-            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
             line-height: 1.6;
             overflow-x: hidden;
         }
+
+        /* =========================================
+   NAVIGATION STYLES (UPDATED FIX)
+   ========================================= */
+
+/* 1. Main Nav Container */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000; /* Highest priority */
+    padding: 1.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    transition: all 0.4s ease;
+}
+
+/* Scrolled State */
+nav.scrolled {
+    background: rgba(5, 5, 5, 0.95);
+    padding: 1rem 5%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* 2. Logo */
+.logo {
+    font-family: var(--font-script);
+    font-size: 2.5rem;
+    color: var(--text-main);
+    text-decoration: none;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2002; /* Must be above mobile menu */
+}
+
+/* 3. Toggle Button (Desktop: Hidden) */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 2rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 2002; /* Must be above mobile menu */
+    transition: color 0.3s ease;
+}
+
+/* 4. Desktop Links Layout */
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+/* Hover Line */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent-gold);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--accent-gold); }
+
+/* Desktop Button Style */
+.btn-nav {
+    padding: 0.8rem 1.8rem;
+    background: transparent;
+    border: 2px solid var(--accent-gold);
+    color: var(--accent-gold) !important;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-nav:hover {
+    background: var(--accent-gold);
+    color: var(--bg-dark) !important;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE (FINAL FIX)
+   ========================================= */
+@media (max-width: 900px) {
+    /* 1. Show Hamburger Button */
+    .mobile-toggle {
+        display: block;
+    }
+
+    /* 2. Mobile Menu Container */
+    .nav-links {
+        /* Layout & Position */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 2001; /* Behind Logo/Toggle */
         
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10,10,10,1);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
+        /* Styling */
+        background-color: rgba(5, 5, 5, 0.98);
+        backdrop-filter: blur(15px);
+        padding: 0;
+        margin: 0;
         
-        .logo {
-            font-family: var(--font-script);
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            color: var(--white);
-            text-decoration: none;
-            letter-spacing: 0.02em;
-        }
-        
-        .nav-center {
-            display: flex;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            letter-spacing: 0.05em;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--teal);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .nav-cta {
-            padding: 0.75rem 2rem;
-            background: var(--orange);
-            color: var(--white);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            border: none;
-            letter-spacing: 0.05em;
-        }
-        
-        .nav-cta:hover {
-            background: #ff8657;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255,107,53,0.4);
-        }
-        
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        @media (max-width: 968px) {
-            .nav-center {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background: rgba(10,10,10,1);
-                padding: 2rem;
-                gap: 2rem;
-                transform: translateX(100%);
-                transition: transform 0.3s ease;
-                border-bottom: 1px solid rgba(255,255,255,0.15);
-                box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            }
-            
-            .nav-center.active {
-                transform: translateX(0);
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                gap: 1.5rem;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .nav-cta {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .mobile-menu-toggle {
-                display: block;
-            }
-        }
-        
-        /* Hero Section */
+        /* HIDDEN STATE (Default) */
+        display: none; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    /* 3. ACTIVE STATE (When class 'active' is added by JS) */
+    .nav-links.active {
+        display: flex; /* Forces menu to appear */
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* 4. Link Styling */
+    .nav-links li {
+        list-style: none;
+        width: 100%;
+        text-align: center;
+        opacity: 0; /* Prepare for animation */
+        animation: slideUp 0.4s ease forwards;
+    }
+
+    /* Stagger the link animations */
+    .nav-links li:nth-child(1) { animation-delay: 0.1s; }
+    .nav-links li:nth-child(2) { animation-delay: 0.2s; }
+    .nav-links li:nth-child(3) { animation-delay: 0.3s; }
+    .nav-links li:nth-child(4) { animation-delay: 0.4s; }
+
+    .nav-links a {
+        font-size: 1.8rem;
+        display: block;
+        color: #ffffff !important;
+        text-decoration: none;
+        padding: 10px;
+    }
+
+    /* 5. Mobile Button Styling */
+    .btn-nav {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        padding: 1rem 3rem;
+        color: var(--accent-gold) !important;
+        border-color: var(--accent-gold);
+    }
+}
+
+/* Animations required for the fix above */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+        /* --- Hero Carousel --- */
         .hero {
             position: relative;
             height: 100vh;
+            width: 100%;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
-        
-        .hero-video-container {
+
+        .video-wrapper {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            z-index: 0;
         }
-        
-        .hero-video-overlay {
+
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(10,10,10,0.2) 0%,
-                rgba(10,10,10,0.4) 50%,
-                rgba(10,10,10,0.7) 100%
-            );
-            z-index: 1;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            filter: brightness(0.4); 
         }
-        
-        .hero-video-placeholder {
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(to bottom, rgba(135, 206, 235, 0.3) 0%, rgba(46, 125, 50, 0.2) 100%),
-                radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.15) 0%, transparent 50%),
-                linear-gradient(135deg, #2a4858 0%, #1a2f3a 50%, #0f1c24 100%);
-            background-size: cover;
-            background-position: center;
-        }
-        
+
+        .hero-video.active { opacity: 1; }
+
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 10;
             text-align: center;
-            max-width: 1000px;
+            max-width: 1100px;
+            padding: 0 20px;
+            margin-top: 40px;
+        }
+
+        .brand-title {
+            font-family: var(--font-script);
+            font-size: clamp(4.5rem, 10vw, 8rem);
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .service-rotator {
+            height: 60px;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .service-item {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0;
+            left: 0;
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            color: var(--accent-gold);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-item.active { opacity: 1; transform: translateY(0); }
+        .service-item.exit { opacity: 0; transform: translateY(40px); }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            padding: 1.2rem 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); 
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            background: var(--accent-gold-light);
+            box-shadow: 0 15px 40px rgba(255, 126, 95, 0.4); 
+        }
+
+        /* --- Sections General --- */
+        section { padding: 8rem 5%; }
+        
+        .section-header { text-align: center; margin-bottom: 5rem; }
+        .section-sub {
+            color: var(--accent-gold);
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--white);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about { background: var(--bg-section); position: relative; }
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .about-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 4px;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+            border: 1px solid #333;
+        }
+        .about-image-wrapper:hover .about-image { filter: grayscale(0%); border-color: var(--accent-gold); }
+        
+        .about-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.2;
+            color: var(--white);
+        }
+        .text-highlight { color: var(--accent-gold); }
+        .about-text { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; font-weight: 300; }
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--white);
+            font-style: italic;
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+        .laurels-row { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+        .laurel-item { display: flex; flex-direction: column; align-items: center; width: 80px; text-align: center; }
+        .laurel-icon { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
+        .laurel-text { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+
+        /* --- WORK / SERVICES SECTION --- */
+        .work-section { background: var(--bg-dark); }
+        
+        .work-filters {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 5px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active { color: var(--accent-gold); }
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .work-card {
+            background: var(--bg-section);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            animation: fadeInUp 0.5s forwards;
+            position: relative;
+        }
+        
+        .work-card:hover { transform: translateY(-8px); border-color: var(--accent-gold); }
+        .work-thumb { height: 240px; width: 100%; overflow: hidden; position: relative; }
+        .work-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .work-card:hover .work-thumb img { transform: scale(1.08); }
+        
+        .work-overlay-icon {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 50px; height: 50px;
+            background: rgba(212, 175, 55, 0.9);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #000; opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .work-card:hover .work-overlay-icon { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .work-info { padding: 1.5rem 2rem; }
+        .work-cat { color: var(--accent-orange-pop); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 0.5rem; }
+        .work-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem; }
+
+        /* --- TESTIMONIALS SECTION --- */
+        .testimonials { background: #080808; padding: 6rem 5%; }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card { text-align: left; padding: 1rem; }
+        .rating-stars { color: var(--accent-orange-pop); font-size: 1rem; margin-bottom: 1.5rem; letter-spacing: 3px; }
+        .testimonial-quote { font-family: var(--font-serif); font-size: 1.4rem; line-height: 1.6; color: var(--white); margin-bottom: 2rem; font-weight: 400; }
+        .client-name { color: var(--accent-gold); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- WHY WORK WITH US SECTION --- */
+        .why-us-section { background: var(--bg-dark); padding: 6rem 5%; }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .why-item { display: flex; gap: 1.5rem; align-items: flex-start; }
+        .why-icon { font-size: 2.2rem; color: var(--accent-gold); min-width: 50px; margin-top: 5px; }
+        .why-content h3 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 0.8rem; font-weight: 400; }
+        .why-content p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+        /* --- CTA / TRANSFORMATION SECTION --- */
+        .cta-section {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background-attachment: fixed; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url('https://images.unsplash.com/photo-1596521323377-526487e49221?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        }
+
+        .cta-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
             padding: 0 5%;
-            animation: fadeInUp 1.2s ease;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .cta-left h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .cta-desc { color: var(--text-main); font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 500px; }
+        .cta-right { border-left: 2px solid var(--accent-gold); padding-left: 3rem; display: none; }
+        @media(min-width: 900px) { .cta-right { display: block; } }
+        .cta-quote { font-family: var(--font-serif); font-size: 2rem; color: var(--white); font-style: italic; margin-bottom: 1rem; }
+        .cta-author { color: var(--accent-orange-pop); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- PRICING SECTION (New) --- */
+        .pricing-section {
+            background: var(--bg-section);
+            padding: 8rem 5%;
+        }
+
+        .pricing-list {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-row:hover {
+            border-bottom-color: var(--accent-gold);
+            transform: translateX(10px);
+        }
+
+        .pricing-row:first-child { border-top: 1px solid var(--border-light); }
+
+        .price-tag {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--white);
+            flex: 0 0 25%;
+            min-width: 200px;
+        }
+
+        .price-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+            padding: 0 2rem;
+            min-width: 300px;
+        }
+
+        .price-link {
+            color: var(--white);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .pricing-row:hover .price-link { color: var(--accent-gold); }
+        .price-link i { font-size: 0.8rem; transition: transform 0.3s; }
+        .pricing-row:hover .price-link i { transform: translateX(5px); }
+
+        @media(max-width: 768px) {
+            .pricing-row { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .price-desc { padding: 0; }
+        }
+
+        /* --- PROJECT DETAIL MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 2rem;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: all; }
+        .modal-content {
+            background: var(--bg-modal); width: 100%; max-width: 1100px; max-height: 90vh; overflow-y: auto;
+            border: 1px solid var(--border-light); position: relative;
+            transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            display: grid; grid-template-columns: 1fr;
+        }
+        @media(min-width: 800px) { .modal-content { grid-template-columns: 2fr 1.5fr; } }
+        .modal-overlay.open .modal-content { transform: translateY(0); }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: transparent; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; z-index: 10; }
+        .modal-media { background: #000; min-height: 300px; display: flex; align-items: center; justify-content: center; }
+        .modal-media img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-details { padding: 3rem; }
+        .detail-header { border-bottom: 1px solid var(--border-light); padding-bottom: 2rem; margin-bottom: 2rem; }
+        .detail-sub { color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+        .detail-title { font-family: var(--font-serif); font-size: 3rem; line-height: 1; margin: 0.5rem 0 1rem; color: var(--white); }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .meta-item label { display: block; color: var(--accent-gold); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.3rem; }
+        .meta-item span { color: var(--text-muted); font-size: 0.95rem; }
+        .detail-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+
+        /* --- Footer --- */
+        .footer { background: #000; padding: 5rem 5%; border-top: 1px solid #1a1a1a; text-align: center; }
+        .footer-logo { font-family: var(--font-script); font-size: 3rem; color: var(--white); display: block; margin-bottom: 2rem; }
+        .footer-links { display: flex; justify-content: center; gap: 3rem; margin-bottom: 2.5rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links a:hover { color: var(--accent-gold); }
+        .copyright { color: #444; font-size: 0.8rem; }
+
+        /* Responsive */
+        @media(max-width: 900px) {
+            .nav-links { display: none; }
+            .about-container { grid-template-columns: 1fr; gap: 3rem; }
+            .about-image { aspect-ratio: 16/9; }
+            .work-filters { gap: 1.5rem; }
+            .why-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .cta-content { grid-template-columns: 1fr; }
+            .cta-right { border-left: none; padding-left: 0; margin-top: 2rem; border-top: 2px solid var(--accent-gold); padding-top: 2rem; display: block; }
         }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .hero h1 {
-            font-family: var(--font-script);
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            color: var(--white);
-            letter-spacing: 0.02em;
-        }
-        
-        .hero-subtext {
-            font-family: var(--font-body);
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            font-weight: 300;
-            color: var(--white);
-            margin-bottom: 3rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-        
-        .hero-ctas {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 1.1rem 2.5rem;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-block;
-            letter-spacing: 0.05em;
-        }
-        
-        .btn-primary {
-            background: var(--orange);
-            color: var(--white);
-        }
-        
-        .btn-primary:hover {
-            background: #ff8657;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255,107,53,0.4);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--white);
-            color: var(--black);
-            transform: translateY(-3px);
-        }
-        
-        /* Section Base */
-        section {
-            padding: var(--section-padding) 5%;
-        }
-        
-        .container {
-            max-width: var(--container-max);
-            margin: 0 auto;
-        }
-        
-        .section-header {
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-        
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--teal);
-        }
-        
-        /* Portfolio */
-        .portfolio {
-            background: var(--black);
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-        
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            background: var(--gray-dark);
-            aspect-ratio: 16 / 10;
-            cursor: pointer;
-            transition: transform 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        
-        .portfolio-item:hover {
-            transform: scale(1.02);
-            border-color: var(--teal);
-        }
-        
-        .portfolio-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,212,170,0.3) 0%, rgba(255,107,53,0.25) 100%);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-image {
-            filter: brightness(0.6);
-            transform: scale(1.05);
-        }
-        
-        .portfolio-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.7) 60%, transparent 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 70%, transparent 100%);
-        }
-        
-        .portfolio-category {
-            font-size: 0.85rem;
-            color: var(--teal);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-category {
-            opacity: 1;
-        }
-        
-        .portfolio-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            opacity: 0.85;
-            transition: all 0.3s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-title {
-            opacity: 1;
-            margin-bottom: 1rem;
-        }
-        
-        .portfolio-cta {
-            display: inline-block;
-            padding: 0.6rem 1.5rem;
-            background: var(--orange);
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        
-        .portfolio-item:hover .portfolio-cta {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .portfolio-cta:hover {
-            background: #ff8657;
-        }
-        
-        /* Services */
-        .services {
-            background: var(--black);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-        
-        .service-card {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 4 / 3;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--teal);
-            box-shadow: 0 15px 40px rgba(0,212,170,0.2);
-        }
-        
-        .service-image {
-            width: 100%;
-            height: 100%;
-            background: var(--gray-dark);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        
-        .service-card:nth-child(1) .service-image {
-            background: linear-gradient(135deg, rgba(255,140,60,0.4) 0%, rgba(255,100,50,0.3) 100%),
-                        radial-gradient(ellipse at bottom, rgba(255,180,100,0.3), transparent),
-                        linear-gradient(to bottom, #1a1510 0%, #2a1f15 100%);
-        }
-        
-        .service-card:nth-child(2) .service-image {
-            background: linear-gradient(135deg, rgba(100,100,120,0.4) 0%, rgba(60,60,80,0.3) 100%),
-                        radial-gradient(circle at center, rgba(150,150,170,0.2), transparent),
-                        linear-gradient(to bottom, #15151a 0%, #1f1f2a 100%);
-        }
-        
-        .service-card:nth-child(3) .service-image {
-            background: linear-gradient(135deg, rgba(200,200,210,0.4) 0%, rgba(160,160,180,0.3) 100%),
-                        radial-gradient(ellipse at top right, rgba(220,220,230,0.2), transparent),
-                        linear-gradient(to bottom, #1a1a1f 0%, #25252a 100%);
-        }
-        
-        .service-card:nth-child(4) .service-image {
-            background: linear-gradient(135deg, rgba(255,140,80,0.4) 0%, rgba(200,100,60,0.3) 100%),
-                        radial-gradient(ellipse at center left, rgba(255,160,100,0.2), transparent),
-                        linear-gradient(to bottom, #1a1510 0%, #2a1f18 100%);
-        }
-        
-        .service-card:hover .service-image {
-            filter: brightness(0.7);
-        }
-        
-        .service-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem 1.5rem;
-            background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.7) 60%, transparent 100%);
-            transition: all 0.3s ease;
-        }
-        
-        .service-title {
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--white);
-        }
-        
-        .service-description {
-            color: var(--gray-light);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            opacity: 0.85;
-        }
-        
-        .service-card:hover .service-description {
-            opacity: 1;
-        }
-        
-        /* About */
-        .about {
-            background: var(--gray-dark);
-            position: relative;
-        }
-        
-        .about::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at top left, rgba(0,212,170,0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(255,107,53,0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .about p {
-            font-size: clamp(1.05rem, 2vw, 1.2rem);
-            line-height: 1.9;
-            color: var(--gray-light);
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-highlight {
-            font-family: var(--font-display);
-            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
-            color: var(--white);
-            font-style: italic;
-            margin: 3rem 0;
-            padding-left: 2rem;
-            border-left: 3px solid var(--teal);
-            line-height: 1.6;
-        }
-        
-        /* Contact */
-        .contact {
-            background: var(--black);
-        }
-        
-        .contact-form {
-            max-width: 700px;
-            margin: 3rem auto 0;
-        }
-        
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.7rem;
-            color: var(--white);
-            font-weight: 400;
-            font-size: 0.95rem;
-            letter-spacing: 0.03em;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem 1.25rem;
-            background: var(--gray-dark);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--white);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(0,212,170,0.1);
-            background: rgba(0,212,170,0.03);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        .form-submit {
-            width: 100%;
-            padding: 1.25rem;
-            background: var(--orange);
-            color: var(--white);
-            border: none;
-            font-family: var(--font-body);
-            font-size: 1.05rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        
-        .form-submit:hover {
-            background: #ff8657;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255,107,53,0.3);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--black);
-            padding: 3rem 5% 2rem;
-            border-top: 2px solid rgba(255,255,255,0.12);
-        }
-        
-        .footer-content {
-            max-width: var(--container-max);
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-logo {
-            font-family: var(--font-script);
-            font-size: 2rem;
-            color: var(--white);
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 2.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            letter-spacing: 0.03em;
-            font-weight: 400;
-        }
-        
-        .footer-links a:hover {
-            color: var(--teal);
-        }
-        
-        .footer-copyright {
-            width: 100%;
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            color: var(--gray-light);
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav {
-                padding: 1.5rem 5%;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-ctas {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .btn {
-                text-align: center;
-            }
-            
-            .portfolio-grid,
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .portfolio-grid {
-                gap: 2rem;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-links {
-                justify-content: center;
-            }
-        }
-        
-        /* Scroll Animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-        
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav>
-        <a href="#home" class="logo">Tant Arts</a>
-        <div class="nav-center">
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#contact" class="nav-cta">Start a Project</a>
-        </div>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+        <a href="#" class="logo">Tant Arts</a>
+        
+        <button class="mobile-toggle" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Our Work</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact" class="btn-nav">Book a Call</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-video-container">
-            <div class="hero-video-placeholder"></div>
-            <div class="hero-video-overlay"></div>
+    <section class="hero">
+        <div class="video-wrapper">
+            <video class="hero-video active" autoplay muted loop playsinline>
+                <source src="static/img/tant v1.mp4" type="video/mp4">
+            </video>
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="static/img/tant v2.mp4" type="video/mp4">
+            </video>
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="static/img/tantv3.mp4" type="video/mp4">
+            </video>
         </div>
+
         <div class="hero-content">
-            <h1>Tant Arts</h1>
-            <p class="hero-subtext">Photography & Video Marketing</p>
-            <div class="hero-ctas">
-                <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
-                <a href="#contact" class="btn btn-secondary">Get Started</a>
+            <h1 class="brand-title">Tant Arts</h1>
+            <div class="service-rotator">
+                <div class="service-item active">Photography & Videography</div>
+                <div class="service-item">Online Visibility</div>
+                <div class="service-item">Videos That Convert</div>
             </div>
+            <a href="#work" class="btn-primary">Start a Project</a>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card scroll-reveal">
-                    <div class="service-image"></div>
-                    <div class="service-overlay">
-                        <h3 class="service-title">Commercial Videography</h3>
-                        <p class="service-description">
-                            High-impact video content designed to showcase products and tell brand stories that convert viewers into customers.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="service-card scroll-reveal">
-                    <div class="service-image"></div>
-                    <div class="service-overlay">
-                        <h3 class="service-title">Marketing Campaigns</h3>
-                        <p class="service-description">
-                            Strategic visual campaigns across digital channels that amplify your message and maximize engagement.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="service-card scroll-reveal">
-                    <div class="service-image"></div>
-                    <div class="service-overlay">
-                        <h3 class="service-title">Brand Photography</h3>
-                        <p class="service-description">
-                            Distinctive imagery that captures your brand essence through product photography and lifestyle shoots.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="service-card scroll-reveal">
-                    <div class="service-image"></div>
-                    <div class="service-overlay">
-                        <h3 class="service-title">Visual Storytelling</h3>
-                        <p class="service-description">
-                            Strategic visual narratives that ensure every frame serves your business goals and resonates with your audience.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <h2 class="section-title">Portfolio</h2>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item scroll-reveal">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Commercial</div>
-                        <h3 class="portfolio-title">Product Launch Campaign</h3>
-                        <a href="#" class="portfolio-cta">View Project</a>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item scroll-reveal">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Marketing Campaigns</div>
-                        <h3 class="portfolio-title">Brand Awareness Series</h3>
-                        <a href="#" class="portfolio-cta">View Project</a>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item scroll-reveal">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Influencer Content</div>
-                        <h3 class="portfolio-title">Social Content Strategy</h3>
-                        <a href="#" class="portfolio-cta">View Project</a>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item scroll-reveal">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Brand Films</div>
-                        <h3 class="portfolio-title">Corporate Storytelling</h3>
-                        <a href="#" class="portfolio-cta">View Project</a>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item scroll-reveal">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Commercial</div>
-                        <h3 class="portfolio-title">E-commerce Visuals</h3>
-                        <a href="#" class="portfolio-cta">View Project</a>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item scroll-reveal">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-category">Marketing Campaigns</div>
-                        <h3 class="portfolio-title">Multi-Platform Campaign</h3>
-                        <a href="#" class="portfolio-cta">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
     <section id="about" class="about">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <h2 class="section-title">About Us</h2>
+        <div class="about-container">
+            <div class="about-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1554048612-387768052bf7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Tant Arts Creative" class="about-image">
             </div>
-            <div class="about-content scroll-reveal">
-                <p>
-                    Tant Arts was founded on a simple belief: great visuals aren't just beautiful—they're strategic tools that drive business outcomes. We're a team of visual storytellers, strategists, and creatives who understand that every frame, every angle, every edit should serve your brand's larger goals.
+            <div class="about-content">
+                <h2 class="about-headline">
+                    <span class="text-highlight">Award-winning</span><br>
+                    Visual Storytellers
+                </h2>
+                <p class="about-text">
+                    We are an award-winning creative agency with years of experience. We create independent films, commercials, and corporate videos. Our clients range from global brands to SMEs and individuals who value exceptional filmmaking standards.
                 </p>
-                <p class="about-highlight">
-                    "We don't just capture moments—we architect experiences that turn viewers into believers, and believers into customers."
-                </p>
-                <p>
-                    Whether you're launching a product, building brand awareness, or reimagining your visual identity, we bring artistic excellence and commercial insight to every project. Our approach combines creative vision with data-driven strategy, ensuring your investment delivers both aesthetic impact and measurable results.
-                </p>
+                <div class="quote-text">
+                    For real impact, visual storytelling is the most powerful and emotive form of communication possible.
+                </div>
+                <a href="#contact" class="btn-primary">Read More</a>
+                <div class="laurels-row">
+                    <div class="laurel-item"><i class="fa-solid fa-award laurel-icon"></i><span class="laurel-text">Official Selection</span></div>
+                    <div class="laurel-item"><i class="fa-solid fa-trophy laurel-icon"></i><span class="laurel-text">Best Cinema</span></div>
+                    <div class="laurel-item"><i class="fa-solid fa-star laurel-icon"></i><span class="laurel-text">Top Rated</span></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header scroll-reveal">
-                <h2 class="section-title">Contact</h2>
+    <section id="work" class="work-section">
+        <div class="section-header">
+            <span class="section-sub">My Work</span>
+            <h2 class="section-title">Featured Projects</h2>
+        </div>
+
+        <div class="work-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="corporate">Corporate</button>
+            <button class="filter-btn" data-filter="commercial">Commercial</button>
+            <button class="filter-btn" data-filter="film">Film & TV</button>
+        </div>
+
+        <div class="work-grid">
+            <div class="work-card" data-category="commercial" onclick="openModal('shackleton')">
+                <div class="work-thumb"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Shackleton"><div class="work-overlay-icon"><i class="fa-solid fa-play"></i></div></div>
+                <div class="work-info"><div class="work-cat">Commercials</div><h3 class="work-title">Shackleton Advisers</h3></div>
             </div>
-            <form class="contact-form scroll-reveal">
+            <div class="work-card" data-category="corporate" onclick="openModal('nikon')">
+                <div class="work-thumb"><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Nikon"><div class="work-overlay-icon"><i class="fa-solid fa-play"></i></div></div>
+                <div class="work-info"><div class="work-cat">Corporate</div><h3 class="work-title">Nikon UK</h3></div>
+            </div>
+            <div class="work-card" data-category="film" onclick="openModal('misk')">
+                <div class="work-thumb"><img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Misk"><div class="work-overlay-icon"><i class="fa-solid fa-play"></i></div></div>
+                <div class="work-info"><div class="work-cat">Documentary</div><h3 class="work-title">Misk Foundation</h3></div>
+            </div>
+             <div class="work-card" data-category="commercial" onclick="openModal('fashion')">
+                <div class="work-thumb"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fashion"><div class="work-overlay-icon"><i class="fa-solid fa-plus"></i></div></div>
+                <div class="work-info"><div class="work-cat">Photography</div><h3 class="work-title">Vogue Series</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="rating-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-quote">"Tant Arts is incredibly professional, knowledgeable, creative and easy to work with. The final product exceeded our expectations."</p>
+                <div class="client-name">Kelly, WSGP</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-quote">"Their experience in directing and producing is impressive. They managed the entire process flawlessly from concept to delivery."</p>
+                <div class="client-name">Lyuben, Circuit</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="testimonial-quote">"The project was delivered before the deadline and on budget. A truly premium service that we will definitely use again."</p>
+                <div class="client-name">Jeremy, Higgins Homes</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="why-us-section">
+        <div class="section-header" style="text-align: left; max-width: 1200px; margin: 0 auto 4rem; padding: 0 1rem;">
+            <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 3.5rem); text-transform: none;">
+                Why people <span style="color: var(--accent-gold);">work with us</span>
+            </h2>
+        </div>
+
+        <div class="why-grid">
+            <div class="why-item">
+                <div class="why-icon" style="color: var(--accent-gold);"><i class="fa-regular fa-lightbulb"></i></div>
+                <div class="why-content">
+                    <h3 style="color: var(--accent-gold);">Strategic Creativity</h3>
+                    <p>We don't just capture visuals; we solve business problems. We align every shot, edit, and script with your marketing goals to ensure your content actually performs online.</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon" style="color: var(--accent-gold);"><i class="fa-solid fa-film"></i></div>
+                <div class="why-content">
+                    <h3 style="color: var(--accent-gold);">Cinematic Excellence</h3>
+                    <p>We bring cinema-grade production standards to corporate branding. Our team ensures your brand looks premium, established, and authoritative in every frame.</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon" style="color: var(--accent-gold);"><i class="fa-solid fa-clock"></i></div>
+                <div class="why-content">
+                    <h3 style="color: var(--accent-gold);">Reliable Delivery</h3>
+                    <p>We operate as a structured system. This means clear timelines, transparent budgets, and a guaranteed delivery schedule. We respect your time as much as your investment.</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon" style="color: var(--accent-gold);"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="why-content">
+                    <h3 style="color: var(--accent-gold);">Focus on ROI</h3>
+                    <p>Beautiful video is useless if it doesn't convert. We design content specifically for online visibility, ensuring it grabs attention and drives customer action.</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon" style="color: var(--accent-gold);"><i class="fa-solid fa-users-viewfinder"></i></div>
+                <div class="why-content">
+                    <h3 style="color: var(--accent-gold);">Collaborative Partnership</h3>
+                    <p>You aren't hiring a freelancer; you are partnering with a dedicated creative department. We work closely with your team to understand your brand voice deeply.</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon" style="color: var(--accent-gold);"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="why-content">
+                    <h3 style="color: var(--accent-gold);">End-to-End Solutions</h3>
+                    <p>From concept and scriptwriting to filming, editing, and distribution strategy. We handle the entire visual pipeline so you can focus on running your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="cta-content">
+            <div class="cta-left">
+                <h2>Let's Create Something Amazing!</h2>
+                <p class="cta-desc">If you are interested in raising your impact with our support, please send us an enquiry today.</p>
+                <a href="#contact" class="btn-primary">Book a Consultation</a>
+            </div>
+            <div class="cta-right">
+                <div class="cta-quote">“Don’t wait for inspiration. It comes while working.”</div>
+                <div class="cta-author">Matisse</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="section-header">
+            <h2 class="section-title">Guide to video <span style="color: var(--accent-gold);">production costs</span></h2>
+            <p style="color:var(--text-muted); margin-top:1rem; font-size:1.1rem; max-width:600px; margin-left:auto; margin-right:auto;">
+                The cost of creating a film project <span style="color:var(--accent-gold);">depends on the complexity</span> and resources involved.
+            </p>
+        </div>
+
+        <div class="pricing-list">
+            <div class="pricing-row" onclick="openModal('fashion')">
+                <div class="price-tag">Up to £5,000</div>
+                <div class="price-desc">
+                    Short well-crafted films can be produced at this budget level. Examples include event films, branded content & social media promos. Usually these involve a small crew.
+                </div>
+                <div class="price-link">See Example <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+
+            <div class="pricing-row" onclick="openModal('nikon')">
+                <div class="price-tag">£5,000 - £15,000</div>
+                <div class="price-desc">
+                    Many corporate films are produced in this budget range. This allows for higher production value, lighting crews, advanced editing, and more extensive pre-production planning.
+                </div>
+                <div class="price-link">See Example <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+
+            <div class="pricing-row" onclick="openModal('misk')">
+                <div class="price-tag">£25,000+</div>
+                <div class="price-desc">
+                    For more complex commercial projects targeting larger audiences. Budgets reflect the high level of creative strategy, large-scale crews, and cinema-quality post-production.
+                </div>
+                <div class="price-link">See Example <i class="fa-solid fa-arrow-right"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-media">
+                <img id="modalImg" src="" alt="Project Visual">
+            </div>
+            <div class="modal-details">
+                <div class="detail-header">
+                    <span class="detail-sub">Project Details</span>
+                    <h2 class="detail-title" id="modalTitle">Project Name</h2>
+                    <span id="modalCat" style="color:var(--accent-orange-pop); text-transform:uppercase; font-size:0.8rem; font-weight:600;">Category</span>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item"><label>Budget</label><span id="modalBudget">£5000</span></div>
+                    <div class="meta-item"><label>Duration</label><span id="modalDuration">3 Minutes</span></div>
+                    <div class="meta-item"><label>My Role</label><span id="modalRole">Director & Editor</span></div>
+                    <div class="meta-item"><label>Resources</label><span>Drone, Cinema Camera</span></div>
+                </div>
+                <div class="detail-desc" id="modalDesc"><p>Description goes here...</p></div>
+                <a href="#contact" class="btn-primary" style="padding: 1rem 2rem; font-size:0.8rem;">Enquire About This</a>
+            </div>
+        </div>
+    </div>
+    <section id="contact" class="booking-section">
+        <div class="booking-overlay"></div>
+        <div class="booking-container">
+            
+            <div class="booking-text">
+                <span class="section-sub" style="margin: 0; text-align: left;">Start the conversation</span>
+                <h2 class="section-title" style="text-align: left; margin-top: 1rem; font-size: clamp(2.5rem, 4vw, 3.5rem);">
+                    Ready to <span style="color: var(--accent-gold);">Collaborate?</span>
+                </h2>
+                
+                <div class="booking-quote-box">
+                    <p class="booking-quote">
+                        “Visual excellence isn't an accident. It's a partnership. Let's craft a narrative that elevates your brand to the next level.”
+                    </p>
+                </div>
+
+                <div class="contact-direct">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>hello@tantarts.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+254 700 000 000</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="booking-form">
                 <div class="form-group">
+                    <input type="text" id="name" required placeholder=" ">
                     <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
                 </div>
                 
                 <div class="form-group">
+                    <input type="email" id="email" required placeholder=" ">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="company">Company / Brand</label>
-                    <input type="text" id="company" name="company">
-                </div>
-                
-                <div class="form-group">
-                    <label for="budget">Project Budget</label>
-                    <select id="budget" name="budget" required>
-                        <option value="">Select Budget Range</option>
-                        <option value="custom">Custom</option>
-                        <option value="enterprise">Enterprise</option>
+                    <select id="budget" required style="color: var(--text-muted);">
+                        <option value="" disabled selected>Select a Budget Range</option>
+                        <option value="5k">Up to £5,000</option>
+                        <option value="15k">£5,000 - £15,000</option>
+                        <option value="25k">£25,000+</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="message">Tell Us About Your Project</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <textarea id="message" rows="4" required placeholder=" "></textarea>
+                    <label for="message">Tell us about your project</label>
                 </div>
-                
-                <button type="submit" class="form-submit">Send Inquiry</button>
+
+                <button type="submit" class="btn-primary" style="width: 100%; border-radius: 0;">
+                    Send Enquiry
+                </button>
             </form>
+
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Tant Arts</div>
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
+    <style>
+        .booking-section {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1601506521793-dc748fc80b67?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Cinematic dark set background */
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            padding: 8rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booking-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(10,10,10,0.85) 100%);
+            z-index: 1;
+        }
+
+        .booking-container {
+            position: relative; z-index: 2;
+            width: 100%; max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        /* Text Styling */
+        .booking-quote-box {
+            margin: 2.5rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .booking-quote {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--white);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .contact-direct { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
+        .contact-item { display: flex; align-items: center; gap: 1rem; color: var(--text-muted); font-size: 1.1rem; }
+        .contact-item i { color: var(--accent-gold); font-size: 1.2rem; }
+
+        /* Form Styling */
+        .booking-form {
+            background: rgba(255,255,255,0.02);
+            padding: 3rem;
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 1rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #444;
+            color: var(--white);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            border-radius: 0;
+        }
+
+        .form-group select option {
+            background: var(--bg-dark);
+            color: var(--white);
+        }
+
+        /* Floating Label Animation */
+        .form-group label {
+            position: absolute;
+            top: 1rem;
+            left: 0;
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .form-group input:focus ~ label,
+        .form-group input:not(:placeholder-shown) ~ label,
+        .form-group textarea:focus ~ label,
+        .form-group textarea:not(:placeholder-shown) ~ label {
+            top: -1.2rem;
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+        }
+
+        @media(max-width: 900px) {
+            .booking-container { grid-template-columns: 1fr; gap: 3rem; }
+            .booking-form { padding: 2rem; }
+        }
+    </style>
+
+    <section class="process-section">
+        <div class="section-header">
+            <span class="section-sub">Our Workflow</span>
+            <h2 class="section-title">The Production <span style="color: var(--accent-gold);">Process</span></h2>
+        </div>
+
+        <div class="accordion-container">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="header-left">
+                        <i class="fa-solid fa-comments process-icon"></i>
+                        <h3>Discovery & Consultation</h3>
+                    </div>
+                    <i class="fa-solid fa-plus toggle-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="body-content">
+                        <div class="body-image">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Consultation">
+                        </div>
+                        <div class="body-text">
+                            <p>Most projects start with an initial consultation. This is where we listen to your vision, understand your brand voice, and define the core objectives of the video.</p>
+                            <ul>
+                                <li>Creative Briefing</li>
+                                <li>Goal Definition</li>
+                                <li>Budget Alignment</li>
+                                <li>Strategic Input</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="header-left">
+                        <i class="fa-solid fa-lightbulb process-icon"></i>
+                        <h3>Conceptual Development</h3>
+                    </div>
+                    <i class="fa-solid fa-plus toggle-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="body-content">
+                        <div class="body-image">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Concept">
+                        </div>
+                        <div class="body-text">
+                            <p>Once we agree to move forward, we refine the project concept. We develop scripts, mood boards, and visual styles to ensure we are perfectly aligned before a camera starts rolling.</p>
+                            <ul>
+                                <li>Scriptwriting</li>
+                                <li>Storyboarding</li>
+                                <li>Visual Style Guide</li>
+                                <li>Location Scouting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="header-left">
+                        <i class="fa-solid fa-clipboard-list process-icon"></i>
+                        <h3>Pre-Production Planning</h3>
+                    </div>
+                    <i class="fa-solid fa-plus toggle-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="body-content">
+                        <div class="body-image">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Planning">
+                        </div>
+                        <div class="body-text">
+                            <p>The logistics phase. We handle casting, crew scheduling, equipment rental, and permits. This ensures the shoot day runs flawlessly and on schedule.</p>
+                            <ul>
+                                <li>Cast & Crew Hiring</li>
+                                <li>Scheduling</li>
+                                <li>Risk Assessment</li>
+                                <li>Logistics Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="header-left">
+                        <i class="fa-solid fa-video process-icon"></i>
+                        <h3>Filming & Production</h3>
+                    </div>
+                    <i class="fa-solid fa-plus toggle-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="body-content">
+                        <div class="body-image">
+                            <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Filming">
+                        </div>
+                        <div class="body-text">
+                            <p>Action. Our award-winning directors and cinematographers bring the vision to life using cinema-grade equipment, ensuring every frame looks premium.</p>
+                            <ul>
+                                <li>4K/6K Cinema Cameras</li>
+                                <li>Professional Lighting</li>
+                                <li>Directing Talent</li>
+                                <li>On-set Audio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <div class="header-left">
+                        <i class="fa-solid fa-laptop-file process-icon"></i>
+                        <h3>Post-Production Editing</h3>
+                    </div>
+                    <i class="fa-solid fa-plus toggle-icon"></i>
+                </div>
+                <div class="accordion-body">
+                    <div class="body-content">
+                        <div class="body-image">
+                            <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Editing">
+                        </div>
+                        <div class="body-text">
+                            <p>Where the magic happens. We edit, color grade, sound design, and add motion graphics to create a polished final product ready for distribution.</p>
+                            <ul>
+                                <li>Video Editing</li>
+                                <li>Color Grading</li>
+                                <li>Sound Design</li>
+                                <li>VFX & Motion Graphics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            © 2026 Tant Arts. All rights reserved.
+    </section>
+
+    <style>
+        .process-section {
+            background: var(--bg-dark);
+            padding: 8rem 5%;
+        }
+
+        .accordion-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover h3 {
+            color: var(--accent-gold);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .process-icon {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .accordion-item.active .process-icon {
+            color: var(--accent-gold);
+        }
+
+        .accordion-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 400;
+            margin: 0;
+            transition: color 0.3s;
+        }
+
+        .toggle-icon {
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: transform 0.4s ease, color 0.3s;
+        }
+
+        /* Rotate icon when active */
+        .accordion-item.active .toggle-icon {
+            transform: rotate(45deg); /* Turns Plus into X */
+            color: var(--accent-gold);
+        }
+
+        /* Body Animation */
+        .accordion-body {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+        }
+
+        .accordion-item.active .accordion-body {
+            max-height: 1000px; /* Arbitrary large height */
+            opacity: 1;
+        }
+
+        .body-content {
+            padding: 0 0 2.5rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .body-image img {
+            width: 100%;
+            border-radius: 4px;
+            filter: grayscale(50%);
+            transition: filter 0.3s;
+        }
+
+        .accordion-item:hover .body-image img {
+            filter: grayscale(0%);
+        }
+
+        .body-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .body-text ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .body-text ul li {
+            color: var(--white);
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.5rem;
+            font-weight: 500;
+        }
+
+        .body-text ul li::before {
+            content: '•';
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        @media(max-width: 768px) {
+            .body-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .header-left { gap: 1rem; }
+            .accordion-header h3 { font-size: 1.2rem; }
+        }
+    </style>
+
+    <script>
+        const accordions = document.querySelectorAll('.accordion-header');
+
+        accordions.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Optional: Close others when one opens (Accordion style)
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">Tant Arts</a>
+                    <p class="footer-tagline">Visual narratives that convert.</p>
+                </div>
+                <div class="footer-socials">
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-vimeo-v"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-content">
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Production Services</h4>
+                    <ul class="footer-list">
+                        <li><a href="#">Commercial Videography</a></li>
+                        <li><a href="#">Brand Photography</a></li>
+                        <li><a href="#">Corporate Filmmaking</a></li>
+                        <li><a href="#">Social Media Content</a></li>
+                        <li><a href="#">Documentary Style</a></li>
+                        <li><a href="#">Event Coverage</a></li>
+                        <li><a href="#">Product Photography</a></li>
+                        <li><a href="#">Aerial & Drone</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-heading">Popular Searches</h4>
+                    <div class="footer-tags">
+                        <a href="#" class="tag-box">Brand Strategy</a>
+                        <a href="#" class="tag-box">Content Marketing</a>
+                        <a href="#" class="tag-box">Visual Storytelling</a>
+                        <a href="#" class="tag-box">ROI Focused</a>
+                        <a href="#" class="tag-box">Online Visibility</a>
+                        <a href="#" class="tag-box">Fashion Editorials</a>
+                        <a href="#" class="tag-box">Tech Launch</a>
+                        <a href="#" class="tag-box">Nairobi Creatives</a>
+                        <a href="#" class="tag-box">Luxury Branding</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright-text">
+                    &copy; 2026 Tant Arts. All professional services conducted by Tant Arts Agency.
+                </div>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <style>
+        .main-footer {
+            background-color: #050505; /* Deepest black */
+            padding: 6rem 5% 3rem;
+            border-top: 1px solid var(--border-light);
+            font-family: var(--font-sans);
+        }
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Top: Brand & Socials */
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-script);
+            font-size: 2.5rem;
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-tagline {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 50%; /* Circle icons */
+        }
+
+        .social-link:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-3px);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: var(--border-light);
+            margin-bottom: 4rem;
+        }
+
+        /* Middle: Columns */
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr; /* Left column narrower, Right wider */
+            gap: 5rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-heading {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 1rem;
+        }
+
+        /* List Style */
+        .footer-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns for links */
+            gap: 1rem;
+        }
+
+        .footer-list a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-list a::before {
+            content: '•';
+            color: var(--accent-gold);
+            margin-right: 10px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+
+        .footer-list a:hover {
+            color: var(--white);
+        }
+
+        .footer-list a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Tag Grid Style (Screenshot Match) */
+        .footer-tags {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tag-box {
+            display: block;
+            padding: 1rem;
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag-box:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Bottom */
+        .footer-bottom {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .legal-links a {
+            color: #666;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .legal-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .footer-list {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .legal-links a {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+
     <script>
-        // Mobile menu toggle
-        const mobileToggle = document.querySelector('.mobile-menu-toggle');
-        const navCenter = document.querySelector('.nav-center');
-        
-        mobileToggle.addEventListener('click', () => {
-            navCenter.classList.toggle('active');
-            mobileToggle.textContent = navCenter.classList.contains('active') ? '✕' : '☰';
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navCenter.classList.remove('active');
-                mobileToggle.textContent = '☰';
-            });
-        });
-        
-        // Scroll reveal animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // --- DATA ---
+        const projects = {
+            'shackleton': {
+                title: 'Shackleton Advisers', cat: 'Commercials', budget: '£5,000', duration: '3 Minutes', role: 'Director',
+                img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+                desc: 'A promotional documentary series for a financial adviser.'
+            },
+            'nikon': {
+                title: 'Nikon UK', cat: 'Corporate', budget: '£12,000', duration: '2 Minutes', role: 'Cinematographer',
+                img: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+                desc: 'High-energy corporate showcase for Nikon UK.'
+            },
+            'misk': {
+                title: 'Misk Foundation', cat: 'Documentary', budget: '£25,000', duration: '15 Minutes', role: 'Director',
+                img: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+                desc: 'Architectural evolution documentary series.'
+            },
+            'fashion': {
+                title: 'Vogue Series', cat: 'Photography', budget: '£3,000', duration: 'N/A', role: 'Photographer',
+                img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+                desc: 'Sustainable fashion editorial shoot.'
+            }
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Form submission (demo)
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your inquiry! We\'ll be in touch soon.');
-            e.target.reset();
-        });
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // --- FILTER ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const workCards = document.querySelectorAll('.work-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filterValue = btn.getAttribute('data-filter');
+                workCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        card.style.animation = 'none';
+                        card.offsetHeight; /* trigger reflow */
+                        card.style.animation = 'fadeInUp 0.5s forwards';
+                    } else { card.style.display = 'none'; }
+                });
             });
         });
+
+        // --- MODAL ---
+        const modal = document.getElementById('projectModal');
+        function openModal(projectId) {
+            const data = projects[projectId];
+            if(!data) return;
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalCat').innerText = data.cat;
+            document.getElementById('modalBudget').innerText = data.budget;
+            document.getElementById('modalDuration').innerText = data.duration;
+            document.getElementById('modalRole').innerText = data.role;
+            document.getElementById('modalDesc').innerHTML = `<p>${data.desc}</p>`;
+            document.getElementById('modalImg').src = data.img;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        // --- 1. SCROLL NAVBAR EFFECT ---
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { 
+                nav.classList.add('scrolled'); 
+            } else { 
+                nav.classList.remove('scrolled'); 
+            }
+        });
+
+        // --- 2. MOBILE MENU TOGGLE ---
+        const mobileBtn = document.querySelector('.mobile-toggle');
+        const navList = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const icon = mobileBtn.querySelector('i');
+
+        // Toggle Menu Open/Close
+        mobileBtn.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            
+            // Switch Icon (Bars <-> X)
+            if (navList.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark'); // Requires FontAwesome 6
+                icon.style.color = 'var(--accent-gold)';
+            } else {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-xmark');
+                icon.style.color = 'var(--text-main)';
+            }
+        });
+
+        // Close Menu When a Link is Clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    navList.classList.remove('active');
+                    
+                    // Reset Icon
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-xmark');
+                    icon.style.color = 'var(--text-main)';
+                }
+            });
+        });
+
+        // --- CAROUSEL ---
+        const videos = document.querySelectorAll('.hero-video');
+        const texts = document.querySelectorAll('.service-item');
+        let currentIndex = 0;
+        function changeSlide() {
+            videos[currentIndex].classList.remove('active');
+            texts[currentIndex].classList.remove('active');
+            texts[currentIndex].classList.add('exit');
+            const prevIndex = currentIndex;
+            currentIndex = (currentIndex + 1) % videos.length;
+            videos[currentIndex].classList.add('active');
+            setTimeout(() => { texts[prevIndex].classList.remove('exit'); }, 800);
+            texts[currentIndex].classList.add('active');
+        }
+        setInterval(changeSlide, 5000);
     </script>
 </body>
 </html>
